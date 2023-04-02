@@ -25,15 +25,15 @@ public class Player : MonoBehaviour{
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other){
-        if (other.gameObject.transform.position.y < player.position.y){
-            grounded = true;
-        }
+    void OnTriggerEnter2D(Collider2D other){
+        grounded = true;
     }
 
-    void OnCollisionExit2D(Collision2D other){
-        if (other.gameObject.transform.position.y < player.position.y){
-            grounded = false;
-        }
+    void OnTriggerStay2D(Collider2D other){
+        grounded = true;
+    }
+
+    void OnTriggerExit2D(Collider2D other){
+        grounded = false;
     }
 }
