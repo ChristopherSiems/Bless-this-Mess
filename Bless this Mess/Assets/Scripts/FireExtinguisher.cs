@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemBasic : MonoBehaviour{
+public class FireExtinguisher : MonoBehaviour{
     private bool grabable = false;
     private Transform item;
     public GameObject player;
@@ -15,7 +15,7 @@ public class ItemBasic : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         if (Input.GetKeyDown(KeyCode.Z) && grabable){
-            player.GetComponent<Player>().itemBasic = true;
+            player.GetComponent<Player>().fireExtinguisher = true;
             transform.position = player.GetComponent<Player>().hands;
             item.SetParent(player.GetComponent<Transform>());
         }
