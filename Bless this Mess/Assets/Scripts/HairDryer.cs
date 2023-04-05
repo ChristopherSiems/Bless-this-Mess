@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemBasic : MonoBehaviour{
+public class HairDryer : MonoBehaviour{
     private bool grabable = false;
     private Transform item;
     private GameObject player;
@@ -19,7 +19,7 @@ public class ItemBasic : MonoBehaviour{
     void Update(){
         if (Input.GetKeyDown(KeyCode.Z) && grabable && !player.GetComponent<Player>().holding){
             player.GetComponent<Player>().holding = true;
-            player.GetComponent<Player>().itemBasic = true;
+            player.GetComponent<Player>().hairDryer = true;
             transform.position = player.GetComponent<Player>().hands;
             item.SetParent(player.GetComponent<Transform>());
             sprite.sortingLayerName = "Held";
