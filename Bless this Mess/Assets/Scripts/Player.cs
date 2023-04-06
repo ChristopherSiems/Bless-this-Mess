@@ -28,6 +28,20 @@ public class Player : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         hands = new Vector3(playerT.transform.position.x, playerT.transform.position.y, playerT.transform.position.z - .1f);
+        if (Input.GetKeyDown(KeyCode.Z) && holding){
+            if (fireExtinguisher){
+                playerT.GetChild(0).GetComponent<FireExtinguisher>().Use();
+            }
+            /*else if (chicken){
+                playerT.GetChild(0).GetComponent<Chicken>().Use();
+            }*/
+            else if (hairDryer){
+                playerT.GetChild(0).GetComponent<HairDryer>().Use();
+            }
+            /*else if (trash){
+                playerT.GetChild(0).GetComponent<Trash>().Use();
+            }*/
+        }
         if (player.velocity.x > 0f){
             sprite.flipX = false;
         }
@@ -43,11 +57,15 @@ public class Player : MonoBehaviour{
     }
 
     void OnTriggerEnter2D(Collider2D other){
-        grounded = true;
+        if (!(other.gameObject.tag == "Item")){
+            grounded = true;
+        }
     }
 
     void OnTriggerStay2D(Collider2D other){
-        grounded = true;
+        if (!(other.gameObject.tag == "Item")){
+            grounded = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D other){

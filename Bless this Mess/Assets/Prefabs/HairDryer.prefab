@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3906558268796491980}
   m_Layer: 0
   m_Name: HairDryer
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1477089139
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6a3a8ef6560af5147a533e79ddf4daca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5fe61fc281c67146868467beaf81edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chicken: {fileID: 0}
+  defrosted: {fileID: 21300000, guid: 9630e48d566a02c4aa80d688e2e97b19, type: 3}
 --- !u!61 &3906558268796491980
 BoxCollider2D:
   m_ObjectHideFlags: 0

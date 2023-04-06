@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Chicken : MonoBehaviour{
     private bool grabable = false;
+    private bool done = false;
     private Transform item;
     private GameObject player;
     private SpriteRenderer sprite;
+    public Sprite defrosted;
 
     // Start is called before the first frame update
     void Start(){
@@ -17,7 +19,10 @@ public class Chicken : MonoBehaviour{
 
     // Update is called once per frame
     void Update(){
-        if (Input.GetKeyDown(KeyCode.Z) && grabable && !player.GetComponent<Player>().holding){
+        if (sprite.sprite == defrosted){
+            done = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Z) && grabable && !player.GetComponent<Player>().holding && !done){
             player.GetComponent<Player>().holding = true;
             player.GetComponent<Player>().chicken = true;
             transform.position = player.GetComponent<Player>().hands;

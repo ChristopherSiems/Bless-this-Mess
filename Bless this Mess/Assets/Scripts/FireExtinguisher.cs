@@ -7,12 +7,14 @@ public class FireExtinguisher : MonoBehaviour{
     private Transform item;
     private GameObject player;
     private SpriteRenderer sprite;
+    private GameObject fire;
 
     // Start is called before the first frame update
     void Start(){
         item = GetComponent<Transform>();
         sprite = GetComponent<SpriteRenderer>();
         player = GameObject.FindWithTag("Player");
+        fire = GameObject.FindWithTag("Fire");
     }
 
     // Update is called once per frame
@@ -35,6 +37,15 @@ public class FireExtinguisher : MonoBehaviour{
     void OnTriggerExit2D(Collider2D other){
         if (other.gameObject == player){
             grabable = false;
+        }
+    }
+
+    public void Use(){
+        if (Vector3.Distance(fire.GetComponent<Transform>().position, transform.position) < 2){
+            Destroy(fire);
+            player.GetComponent<Player>().fireExtinguisher = false;
+            player.GetComponent<Player>().holding = false;
+            Destroy(gameObject);
         }
     }
 }

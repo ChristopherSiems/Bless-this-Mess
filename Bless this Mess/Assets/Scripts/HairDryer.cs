@@ -7,6 +7,8 @@ public class HairDryer : MonoBehaviour{
     private Transform item;
     private GameObject player;
     private SpriteRenderer sprite;
+    public GameObject chicken;
+    public Sprite defrosted;
 
     // Start is called before the first frame update
     void Start(){
@@ -35,6 +37,15 @@ public class HairDryer : MonoBehaviour{
     void OnTriggerExit2D(Collider2D other){
         if (other.gameObject == player){
             grabable = false;
+        }
+    }
+
+    public void Use(){
+        if (Vector3.Distance(chicken.GetComponent<Transform>().position, transform.position) < 2){
+            chicken.GetComponent<SpriteRenderer>().sprite = defrosted;
+            player.GetComponent<Player>().fireExtinguisher = false;
+            player.GetComponent<Player>().holding = false;
+            Destroy(gameObject);
         }
     }
 }
