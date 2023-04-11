@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Item
+  - Fire
+  - Trashcan
   layers:
   - Default
   - TransparentFX
@@ -43,6 +46,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 1508179519
+    locked: 0
+  - name: Player
+    uniqueID: 3244272523
     locked: 0
   - name: Held
     uniqueID: 1278358689

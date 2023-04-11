@@ -7,12 +7,14 @@ public class Trash : MonoBehaviour{
     private Transform item;
     private GameObject player;
     private SpriteRenderer sprite;
+    private GameObject trashcan;
 
     // Start is called before the first frame update
     void Start(){
         item = GetComponent<Transform>();
         sprite = GetComponent<SpriteRenderer>();
         player = GameObject.FindWithTag("Player");
+        trashcan = GameObject.FindWithTag("Trashcan");
     }
 
     // Update is called once per frame
@@ -35,6 +37,14 @@ public class Trash : MonoBehaviour{
     void OnTriggerExit2D(Collider2D other){
         if (other.gameObject == player){
             grabable = false;
+        }
+    }
+
+    public void Use(){
+        if (Vector3.Distance(trashcan.GetComponent<Transform>().position, transform.position) < 2){
+            player.GetComponent<Player>().trash = false;
+            player.GetComponent<Player>().holding = false;
+            Destroy(gameObject);
         }
     }
 }

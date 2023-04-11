@@ -3,33 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EnemyBehavior : MonoBehaviour{
-    private Vector3 nextPos;
-    public Transform startbPos, posb1, posb2;
+public class Rat : MonoBehaviour{
+    private Vector3 limit1, limit2, next;
+    private GameObject player;
+    private Rigidbody2D rat;
+    private SpriteRenderer sprite;
+    private float knockbackDir;
     public float speed;
-    public int Respawn;
+    public float knockback;
 
     // Start is called before the first frame update
     void Start(){
-        nextPos = startbPos.position;
+        player = GameObject.FindWithTag("Player");
+        rat = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        limit1 = transform.GetChild(0).position;
+        limit2 = transform.GetChild(1).position;
+        next = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
 
     // Update is called once per frame
     void Update(){
-        if (transform.position == posb1.position){
-            nextPos = posb2.position;
+        if (player.GetComponent<SpriteRenderer>().flipX){
+            knockbackDir = 1;
         }
-        else if (transform.position == posb2.position){
-            nextPos = posb1.position;
+        else{
+            knockbackDir = -1;
         }
-        transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
+        if (next.x > transform.position.x){
+            sprite.flipX = false;
+        }
+        else if (next.x < transform.position.x){
+            sprite.flipX = true;
+        }
+        if (transform.position == next){
+            next = new Vector3(Random.Range(limit1.x, limit2.x), transform.position.y, transform.position.z);
+        }
+        transform.position = Vector3.MoveTowards(transform.position, next, speed * Time.deltaTime);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            SceneManager.LoadScene(Respawn);
+    void OnCollisionEnter2D(Collision2D collision){
+        if (collision.gameObject == player){
+            player.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            player.GetComponent<Rigidbody2D>().AddForce(transform.right * knockbackDir * knockback, ForceMode2D.Impulse);
         }
     }
 }

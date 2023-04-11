@@ -38,9 +38,9 @@ public class Player : MonoBehaviour{
             else if (hairDryer){
                 playerT.GetChild(0).GetComponent<HairDryer>().Use();
             }
-            /*else if (trash){
+            else if (trash){
                 playerT.GetChild(0).GetComponent<Trash>().Use();
-            }*/
+            }
         }
         if (player.velocity.x > 0f){
             sprite.flipX = false;
