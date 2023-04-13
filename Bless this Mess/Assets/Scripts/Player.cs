@@ -14,6 +14,7 @@ public class Player : MonoBehaviour{
     public bool hairDryer = false;
     public bool trash = false;
     public bool holding = false;
+    public bool trap = false;
     public float forceH;
     public float maxSpeedH;
     public float forceV;
@@ -40,6 +41,9 @@ public class Player : MonoBehaviour{
             }
             else if (trash){
                 playerT.GetChild(0).GetComponent<Trash>().Use();
+            }
+            else if (trap){
+                playerT.GetChild(0).GetComponent<Trap>().Use();
             }
         }
         if (player.velocity.x > 0f){

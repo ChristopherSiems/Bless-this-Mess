@@ -11,6 +11,7 @@ public class Rat : MonoBehaviour{
     private float knockbackDir;
     public float speed;
     public float knockback;
+    public bool dead = false;
 
     // Start is called before the first frame update
     void Start(){
@@ -30,20 +31,25 @@ public class Rat : MonoBehaviour{
         else{
             knockbackDir = -1;
         }
-        if (next.x > transform.position.x){
-            sprite.flipX = false;
+        if (!dead){
+            if (next.x > transform.position.x){
+                sprite.flipX = false;
+            }
+            else if (next.x < transform.position.x){
+                sprite.flipX = true;
+            }
+            if (transform.position == next){
+                next = new Vector3(Random.Range(limit1.x, limit2.x), transform.position.y, transform.position.z);
+            }
+            transform.position = Vector3.MoveTowards(transform.position, next, speed * Time.deltaTime);
         }
-        else if (next.x < transform.position.x){
-            sprite.flipX = true;
+        else{
+            rat.constraints = RigidbodyConstraints2D.FreezeAll;
         }
-        if (transform.position == next){
-            next = new Vector3(Random.Range(limit1.x, limit2.x), transform.position.y, transform.position.z);
-        }
-        transform.position = Vector3.MoveTowards(transform.position, next, speed * Time.deltaTime);
     }
 
     void OnCollisionEnter2D(Collision2D collision){
-        if (collision.gameObject == player){
+        if (collision.gameObject == player && !dead){
             player.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
             player.GetComponent<Rigidbody2D>().AddForce(transform.right * knockbackDir * knockback, ForceMode2D.Impulse);
         }
