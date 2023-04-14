@@ -7,6 +7,8 @@ TagManager:
   - Item
   - Fire
   - Trashcan
+  - Rat
+  - Washer
   layers:
   - Default
   - TransparentFX
@@ -46,6 +48,12 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 1508179519
+    locked: 0
+  - name: Laundry
+    uniqueID: 3258995993
+    locked: 0
+  - name: Washer
+    uniqueID: 1262893879
     locked: 0
   - name: Player
     uniqueID: 3244272523

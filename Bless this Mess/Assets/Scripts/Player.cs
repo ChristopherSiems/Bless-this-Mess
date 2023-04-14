@@ -15,6 +15,7 @@ public class Player : MonoBehaviour{
     public bool trash = false;
     public bool holding = false;
     public bool trap = false;
+    public bool laundry = false;
     public float forceH;
     public float maxSpeedH;
     public float forceV;
@@ -29,7 +30,7 @@ public class Player : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         hands = new Vector3(playerT.transform.position.x, playerT.transform.position.y, playerT.transform.position.z - .1f);
-        if (Input.GetKeyDown(KeyCode.Z) && holding){
+        if (Input.GetKeyDown(KeyCode.X) && holding){
             if (fireExtinguisher){
                 playerT.GetChild(0).GetComponent<FireExtinguisher>().Use();
             }
@@ -44,6 +45,9 @@ public class Player : MonoBehaviour{
             }
             else if (trap){
                 playerT.GetChild(0).GetComponent<Trap>().Use();
+            }
+            else if (laundry){
+                playerT.GetChild(0).GetComponent<Laundry>().Use();
             }
         }
         if (player.velocity.x > 0f){

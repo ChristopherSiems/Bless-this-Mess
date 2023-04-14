@@ -8,36 +8,42 @@ public class Trap : MonoBehaviour{
     private GameObject player;
     private SpriteRenderer sprite;
     private Rigidbody2D trap;
-    private EdgeCollider2D edge;
+    private EdgeCollider2D bottom;
     public Sprite sprung;
 
     // Start is called before the first frame update
     void Start(){
         item = GetComponent<Transform>();
         sprite = GetComponent<SpriteRenderer>();
-        trap = GetComponent<Rigidbody2D>();
-        edge = GetComponent<EdgeCollider2D>();
         player = GameObject.FindWithTag("Player");
+        trap = GetComponent<Rigidbody2D>();
+        bottom = GetComponent<EdgeCollider2D>();
     }
 
     // Update is called once per frame
     void Update(){
-        if (Input.GetKeyDown(KeyCode.Z) && grabable && !player.GetComponent<Player>().holding){
-            trap.gravityScale = 0;
-            edge.isTrigger = true;
+        if (Input.GetKeyDown(KeyCode.Z) && grabable && !player.GetComponent<Player>().holding && sprite.sprite != sprung){
             player.GetComponent<Player>().holding = true;
-            player.GetComponent<Player>().itemBasic = true;
-            transform.position = player.GetComponent<Player>().hands;
+            player.GetComponent<Player>().trap = true;
+            trap.position = player.GetComponent<Player>().hands;
             item.SetParent(player.GetComponent<Transform>());
             sprite.sortingLayerName = "Held";
+        }
+        if (transform.parent == player.transform){
+            trap.gravityScale = 0;
+            Physics2D.IgnoreCollision(bottom, player.GetComponent<BoxCollider2D>(), true);
+            trap.position = player.GetComponent<Player>().hands;
+        }
+        else{
+            trap.gravityScale = 1;
         }
     }
 
     void OnTriggerEnter2D(Collider2D other){
-        if (other.gameObject == player && sprite.sprite != sprung){
+        if (other.gameObject == player){
             grabable = true;
         }
-        else if (other.gameObject.tag == "Rat"){
+        else if (other.gameObject.tag == "Rat" && sprite.sprite != sprung){
             other.gameObject.GetComponent<Rat>().dead = true;
             other.gameObject.GetComponent<SpriteRenderer>().flipY = true;
             sprite.sprite = sprung;
@@ -45,9 +51,8 @@ public class Trap : MonoBehaviour{
     }
 
     void OnTriggerExit2D(Collider2D other){
-        if (other.gameObject == player && sprite.sprite != sprung){
+        if (other.gameObject == player){
             grabable = false;
-            edge.isTrigger = false;
         }
     }
 
@@ -55,6 +60,5 @@ public class Trap : MonoBehaviour{
         player.GetComponent<Player>().trap = false;
         player.GetComponent<Player>().holding = false;
         player.GetComponent<Transform>().DetachChildren();
-        trap.gravityScale = 1;
     }
 }
