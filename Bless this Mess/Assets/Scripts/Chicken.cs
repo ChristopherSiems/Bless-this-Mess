@@ -8,6 +8,7 @@ public class Chicken : MonoBehaviour{
     private Transform item;
     private GameObject player;
     private SpriteRenderer sprite;
+    private GameObject stove;
     public Sprite defrosted;
 
     // Start is called before the first frame update
@@ -15,6 +16,7 @@ public class Chicken : MonoBehaviour{
         item = GetComponent<Transform>();
         sprite = GetComponent<SpriteRenderer>();
         player = GameObject.FindWithTag("Player");
+        stove = GameObject.FindWithTag("Stove");
     }
 
     // Update is called once per frame
@@ -40,6 +42,17 @@ public class Chicken : MonoBehaviour{
     void OnTriggerExit2D(Collider2D other){
         if (other.gameObject == player){
             grabable = false;
+        }
+    }
+
+    public void Use(){
+        if (stove.GetComponent<Stove>().reachable){
+            player.GetComponent<Player>().chicken = false;
+            player.GetComponent<Player>().holding = false;
+            player.GetComponent<Transform>().DetachChildren();
+            item.SetParent(stove.GetComponent<Transform>().GetChild(0));
+            item.position = item.parent.position;
+            sprite.sortingLayerName = "Background";
         }
     }
 }

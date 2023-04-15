@@ -34,9 +34,9 @@ public class Player : MonoBehaviour{
             if (fireExtinguisher){
                 playerT.GetChild(0).GetComponent<FireExtinguisher>().Use();
             }
-            /*else if (chicken){
+            else if (chicken){
                 playerT.GetChild(0).GetComponent<Chicken>().Use();
-            }*/
+            }
             else if (hairDryer){
                 playerT.GetChild(0).GetComponent<HairDryer>().Use();
             }

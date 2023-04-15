@@ -8,6 +8,7 @@ public class Rat : MonoBehaviour{
     private GameObject player;
     private Rigidbody2D rat;
     private SpriteRenderer sprite;
+    private Animator anim;
     private float knockbackDir;
     public float speed;
     public float knockback;
@@ -18,6 +19,7 @@ public class Rat : MonoBehaviour{
         player = GameObject.FindWithTag("Player");
         rat = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
         limit1 = transform.GetChild(0).position;
         limit2 = transform.GetChild(1).position;
         next = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -44,6 +46,7 @@ public class Rat : MonoBehaviour{
             transform.position = Vector3.MoveTowards(transform.position, next, speed * Time.deltaTime);
         }
         else{
+            anim.enabled = false;
             rat.constraints = RigidbodyConstraints2D.FreezeAll;
         }
     }
