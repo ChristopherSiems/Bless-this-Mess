@@ -21,12 +21,15 @@ public class Player : MonoBehaviour{
     public float forceV;
     public int maxHealth = 100;
     public int currentHealth;
+    public UIHealth healthBar;
 
     // Start is called before the first frame update
     void Start(){
         player = GetComponent<Rigidbody2D>();
         playerT = GetComponent<Transform>();
         sprite = GetComponent<SpriteRenderer>();
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -64,6 +67,10 @@ public class Player : MonoBehaviour{
         if (Input.GetKeyDown(KeyCode.UpArrow) && grounded){
             player.AddForce(transform.up * forceV, ForceMode2D.Impulse);
         }
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(20);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -93,5 +100,7 @@ public class Player : MonoBehaviour{
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
     }
 }

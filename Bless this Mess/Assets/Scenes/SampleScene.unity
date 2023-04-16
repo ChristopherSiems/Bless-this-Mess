@@ -178,7 +178,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0084917545, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -189,7 +189,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.1188817, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &155534407
 SpriteRenderer:
@@ -284,6 +284,7 @@ MonoBehaviour:
   forceV: 8
   maxHealth: 100
   currentHealth: 0
+  healthBar: {fileID: 1606427241}
 --- !u!68 &155534410
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -705,7 +706,7 @@ GameObject:
   - component: {fileID: 1124365917}
   - component: {fileID: 1124365916}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Sample Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -978,9 +979,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -993,7 +994,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1606427238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 346d2cb60585bc2458b8be688d2f52a9, type: 3}
+  m_Script: {fileID: 11500000, guid: ebb5550fa8a502e4ea88f89dc413c520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1606427240}
@@ -1026,6 +1027,7 @@ MonoBehaviour:
     m_Mode: 1
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
+  fill: {fileID: 2093967541}
 --- !u!1 &1970297570
 GameObject:
   m_ObjectHideFlags: 0
