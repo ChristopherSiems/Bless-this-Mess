@@ -19,6 +19,8 @@ public class Player : MonoBehaviour{
     public float forceH;
     public float maxSpeedH;
     public float forceV;
+    public int maxHealth = 100;
+    public int currentHealth;
 
     // Start is called before the first frame update
     void Start(){
@@ -64,6 +66,14 @@ public class Player : MonoBehaviour{
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            TakeDamage(20);
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D other){
         if (!(other.gameObject.tag == "Item")){
             grounded = true;
@@ -78,5 +88,10 @@ public class Player : MonoBehaviour{
 
     void OnTriggerExit2D(Collider2D other){
         grounded = false;
+    }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
     }
 }
