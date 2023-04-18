@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FireExtinguisher : MonoBehaviour{
     private bool grabable = false;
+    private bool done = false;
     private Transform item;
     private GameObject player;
     private SpriteRenderer sprite;
@@ -47,5 +48,13 @@ public class FireExtinguisher : MonoBehaviour{
             player.GetComponent<Player>().holding = false;
             Destroy(gameObject);
         }
+        // switches the task from incomplete to complete 
+        if (!fire) {
+            done = true;
+            Sprite newSprite = Resources.Load<Sprite>("Checked_Box"); //name of completed sprite
+            sprite.sprite = newSprite;
+}
+
+
     }
 }

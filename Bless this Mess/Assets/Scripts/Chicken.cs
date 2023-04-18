@@ -18,9 +18,12 @@ public class Chicken : MonoBehaviour{
     }
 
     // Update is called once per frame
+    // switches the task from incomplete to complete 
     void Update(){
-        if (sprite.sprite == defrosted){
+        if (sprite.sprite == defrosted && !done){
             done = true;
+            Sprite newSprite = Resources.Load<Sprite>("Checked_Box"); //name of completed sprite
+            sprite.sprite = newSprite;
         }
         if (Input.GetKeyDown(KeyCode.Z) && grabable && !player.GetComponent<Player>().holding && !done){
             player.GetComponent<Player>().holding = true;
@@ -29,6 +32,7 @@ public class Chicken : MonoBehaviour{
             item.SetParent(player.GetComponent<Transform>());
             sprite.sortingLayerName = "Held";
         }
+        
     }
 
     void OnTriggerEnter2D(Collider2D other){
@@ -43,3 +47,4 @@ public class Chicken : MonoBehaviour{
         }
     }
 }
+
