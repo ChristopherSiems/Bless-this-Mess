@@ -62,7 +62,7 @@ public class Trap : MonoBehaviour{
         player.GetComponent<Player>().holding = false;
         player.GetComponent<Transform>().DetachChildren();
 
-        // Check if trap is no longer being held and player is no longer in trap
+        // Check if trap is no longer being held and player is no longer holding trap
         if (!player.GetComponent<Player>().holding && !player.GetComponent<Player>().trap) {
             done = true;
             Sprite newSprite = Resources.Load<Sprite>("Checked_Box"); //name of completed sprite
