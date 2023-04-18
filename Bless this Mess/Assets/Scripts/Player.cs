@@ -67,19 +67,16 @@ public class Player : MonoBehaviour{
         if (Input.GetKeyDown(KeyCode.UpArrow) && grounded){
             player.AddForce(transform.up * forceV, ForceMode2D.Impulse);
         }
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
+        /*if(Input.GetKeyDown(KeyCode.Space)){
             TakeDamage(20);
-        }
+        }*/
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Enemy")
-        {
+    /*private void OnCollisionEnter2D(Collision2D collision){
+        if(collision.gameObject.tag == "Enemy"){
             TakeDamage(20);
         }
-    }
+    }*/
 
     void OnTriggerEnter2D(Collider2D other){
         if (!(other.gameObject.tag == "Item")){
@@ -97,10 +94,8 @@ public class Player : MonoBehaviour{
         grounded = false;
     }
 
-    void TakeDamage(int damage)
-    {
+    public void TakeDamage(int damage){
         currentHealth -= damage;
-
         healthBar.SetHealth(currentHealth);
     }
 }
