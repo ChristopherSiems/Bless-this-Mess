@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour{
     public TMP_Text clock;
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour{
     private int min;
     private int sec;
     private float diff;
+    public int scene;
 
     // Start is called before the first frame update
     void Start(){
@@ -21,11 +23,14 @@ public class GameManager : MonoBehaviour{
         diff = limit - timer;
         min = (int)diff / 60;
         sec = (int)diff - (min * 60);
-        if (sec > 10){
+        if (sec >= 10){
             clock.text = $"{min}:{sec}";
         }
         else{
             clock.text = $"{min}:0{sec}";
+        }
+        if (diff <= 0){
+            SceneManager.LoadScene(scene);
         }
         /*if (timer >= limit){
 

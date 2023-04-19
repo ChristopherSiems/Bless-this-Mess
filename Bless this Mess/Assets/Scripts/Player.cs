@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour{
     private Rigidbody2D player;
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour{
     public int maxHealth = 100;
     public int currentHealth;
     public UIHealth healthBar;
+    public int scene;
 
     // Start is called before the first frame update
     void Start(){
@@ -67,8 +69,11 @@ public class Player : MonoBehaviour{
         if (Input.GetKeyDown(KeyCode.UpArrow) && grounded){
             player.AddForce(transform.up * forceV, ForceMode2D.Impulse);
         }
-        /*if(Input.GetKeyDown(KeyCode.Space)){
-            TakeDamage(20);
+        if (currentHealth <= 0){
+            SceneManager.LoadScene(scene);
+        }
+        /*if(Input.GetKeyDown(KeyCode.P)){
+            TakeDamage(100);
         }*/
     }
 
