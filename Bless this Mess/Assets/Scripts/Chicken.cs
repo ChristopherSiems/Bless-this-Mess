@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Chicken : MonoBehaviour{
-    private bool grabable = false;
     private bool done = false;
     private Transform item;
     private GameObject player;
     private SpriteRenderer sprite;
     private GameObject stove;
+    private GameObject fridge;
     public Sprite defrosted;
 
     // Start is called before the first frame update
@@ -17,6 +17,7 @@ public class Chicken : MonoBehaviour{
         sprite = GetComponent<SpriteRenderer>();
         player = GameObject.FindWithTag("Player");
         stove = GameObject.FindWithTag("Stove");
+        fridge = GameObject.FindWithTag("Fridge");
     }
 
     // Update is called once per frame
@@ -24,24 +25,12 @@ public class Chicken : MonoBehaviour{
         if (sprite.sprite == defrosted){
             done = true;
         }
-        if (Input.GetKeyDown(KeyCode.Z) && grabable && !player.GetComponent<Player>().holding && !done){
+        if (Input.GetKeyDown(KeyCode.Z) && fridge.GetComponent<Fridge>().reachable && !player.GetComponent<Player>().holding && !done){
             player.GetComponent<Player>().holding = true;
             player.GetComponent<Player>().chicken = true;
             transform.position = player.GetComponent<Player>().hands;
             item.SetParent(player.GetComponent<Transform>());
             sprite.sortingLayerName = "Held";
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D other){
-        if (other.gameObject == player){
-            grabable = true;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other){
-        if (other.gameObject == player){
-            grabable = false;
         }
     }
 
