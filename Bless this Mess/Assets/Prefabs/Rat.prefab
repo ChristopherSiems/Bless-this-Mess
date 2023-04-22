@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 6147183256209061408}
   - component: {fileID: 6147183256209061410}
   - component: {fileID: 4297458909097124372}
+  - component: {fileID: 8155157478618488413}
   m_Layer: 0
   m_Name: Rat
   m_TagString: Rat
@@ -155,6 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   knockback: 10
+  dead: 0
 --- !u!61 &4297458909097124372
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -181,6 +183,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.96875, y: 0.5}
   m_EdgeRadius: 0
+--- !u!95 &8155157478618488413
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6147183256209061412}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a4728c1f7ad0d9b45920dfb0ef31c488, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6147183257221100672
 GameObject:
   m_ObjectHideFlags: 0

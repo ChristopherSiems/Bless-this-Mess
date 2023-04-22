@@ -26,6 +26,7 @@ public class Fire : MonoBehaviour{
         if (collision.gameObject == player){
             player.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
             player.GetComponent<Rigidbody2D>().AddForce(transform.right * knockbackDir * knockback, ForceMode2D.Impulse);
+            player.GetComponent<Player>().TakeDamage(20);
         }
     }
 }

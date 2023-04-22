@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour{
     private Rigidbody2D player;
@@ -19,12 +20,18 @@ public class Player : MonoBehaviour{
     public float forceH;
     public float maxSpeedH;
     public float forceV;
+    public int maxHealth = 100;
+    public int currentHealth;
+    public UIHealth healthBar;
+    public int scene;
 
     // Start is called before the first frame update
     void Start(){
         player = GetComponent<Rigidbody2D>();
         playerT = GetComponent<Transform>();
         sprite = GetComponent<SpriteRenderer>();
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -34,9 +41,9 @@ public class Player : MonoBehaviour{
             if (fireExtinguisher){
                 playerT.GetChild(0).GetComponent<FireExtinguisher>().Use();
             }
-            /*else if (chicken){
+            else if (chicken){
                 playerT.GetChild(0).GetComponent<Chicken>().Use();
-            }*/
+            }
             else if (hairDryer){
                 playerT.GetChild(0).GetComponent<HairDryer>().Use();
             }
@@ -62,7 +69,19 @@ public class Player : MonoBehaviour{
         if (Input.GetKeyDown(KeyCode.UpArrow) && grounded){
             player.AddForce(transform.up * forceV, ForceMode2D.Impulse);
         }
+        if (currentHealth <= 0){
+            SceneManager.LoadScene(scene);
+        }
+        /*if(Input.GetKeyDown(KeyCode.P)){
+            TakeDamage(100);
+        }*/
     }
+
+    /*private void OnCollisionEnter2D(Collision2D collision){
+        if(collision.gameObject.tag == "Enemy"){
+            TakeDamage(20);
+        }
+    }*/
 
     void OnTriggerEnter2D(Collider2D other){
         if (!(other.gameObject.tag == "Item")){
@@ -78,5 +97,10 @@ public class Player : MonoBehaviour{
 
     void OnTriggerExit2D(Collider2D other){
         grounded = false;
+    }
+
+    public void TakeDamage(int damage){
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
     }
 }
