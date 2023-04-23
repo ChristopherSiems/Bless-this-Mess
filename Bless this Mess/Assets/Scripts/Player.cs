@@ -8,7 +8,6 @@ public class Player : MonoBehaviour{
     private Transform playerT;
     private SpriteRenderer sprite;
     private bool grounded = false;
-    private Animator anim;
     public Vector3 hands;
     public bool itemBasic = false;
     public bool fireExtinguisher = false;
@@ -25,14 +24,12 @@ public class Player : MonoBehaviour{
     public int currentHealth;
     public UIHealth healthBar;
     public int scene;
-    public GameObject floor;
 
     // Start is called before the first frame update
     void Start(){
         player = GetComponent<Rigidbody2D>();
         playerT = GetComponent<Transform>();
         sprite = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -71,19 +68,9 @@ public class Player : MonoBehaviour{
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) && grounded){
             player.AddForce(transform.up * forceV, ForceMode2D.Impulse);
-            anim.SetBool("jump", true);
-        }
-        else{
-            anim.SetBool("jump", false);
         }
         if (currentHealth <= 0){
             SceneManager.LoadScene(scene);
-        }
-        if (Mathf.Abs(player.velocity.x) > .1f){
-            anim.SetBool("walk", true);
-        }
-        else{
-            anim.SetBool("walk", false);
         }
         /*if(Input.GetKeyDown(KeyCode.P)){
             TakeDamage(100);
@@ -115,14 +102,5 @@ public class Player : MonoBehaviour{
     public void TakeDamage(int damage){
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
-    }
-
-    public void climb(Transform target){
-        while (transform.position != target.position){
-            anim.SetBool("walk", true);
-            player.velocity = new Vector3(0, 0, 0);
-            Physics2D.IgnoreCollision(floor.GetComponent<BoxCollider2D>(), GetComponent<BoxCollider2D>(), true);
-            player.position = Vector3.MoveTowards(player.position, target.position, .05f);
-        }
     }
 }

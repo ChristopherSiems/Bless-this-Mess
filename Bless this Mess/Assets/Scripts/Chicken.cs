@@ -45,7 +45,7 @@ public class Chicken : MonoBehaviour{
             player.GetComponent<Transform>().DetachChildren();
             item.SetParent(stove.GetComponent<Transform>().GetChild(0));
             item.position = item.parent.position;
-            sprite.sortingLayerName = "Background";
+            sprite.sortingLayerName = "Laundry";
         }
     }
 }
