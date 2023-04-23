@@ -7,6 +7,7 @@ public class RaccoonIdle : StateMachineBehaviour
 
     Transform player;
     Rigidbody2D rb;
+    public float WalkRange = 2f;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -15,15 +16,15 @@ public class RaccoonIdle : StateMachineBehaviour
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    { 
-        if(Vector2.Distance(player.position, rb.position) <= 1)
+    {
+        if (Vector2.Distance(player.position, rb.position) <= WalkRange)
         {
             animator.SetTrigger("Run");
         }
     }
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        
     }
 
 
