@@ -7,6 +7,7 @@ public class Player : MonoBehaviour{
     private Rigidbody2D player;
     private Transform playerT;
     private SpriteRenderer sprite;
+    private Collider2D playerC;
     private bool grounded = false;
     private Animator anim;
     public Vector3 hands;
@@ -26,6 +27,10 @@ public class Player : MonoBehaviour{
     public UIHealth healthBar;
     public int scene;
     public GameObject floor;
+    public bool climbUp = false;
+    public bool climbDown = false;
+    public Transform upstairs;
+    public Transform downstairs;
 
     // Start is called before the first frame update
     void Start(){
@@ -33,6 +38,7 @@ public class Player : MonoBehaviour{
         playerT = GetComponent<Transform>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        playerC = GetComponent<BoxCollider2D>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -40,50 +46,71 @@ public class Player : MonoBehaviour{
     // Update is called once per frame
     void Update(){
         hands = new Vector3(playerT.transform.position.x, playerT.transform.position.y, playerT.transform.position.z - .1f);
-        if (Input.GetKeyDown(KeyCode.X) && holding){
-            if (fireExtinguisher){
-                playerT.GetChild(0).GetComponent<FireExtinguisher>().Use();
+        if (!climbUp && !climbDown){
+            if (Input.GetKeyDown(KeyCode.X) && holding){
+                if (fireExtinguisher){
+                    playerT.GetChild(0).GetComponent<FireExtinguisher>().Use();
+                }
+                else if (chicken){
+                    playerT.GetChild(0).GetComponent<Chicken>().Use();
+                }
+                else if (hairDryer){
+                    playerT.GetChild(0).GetComponent<HairDryer>().Use();
+                }
+                else if (trash){
+                    playerT.GetChild(0).GetComponent<Trash>().Use();
+                }
+                else if (trap){
+                    playerT.GetChild(0).GetComponent<Trap>().Use();
+                }
+                else if (laundry){
+                    playerT.GetChild(0).GetComponent<Laundry>().Use();
+                }
             }
-            else if (chicken){
-                playerT.GetChild(0).GetComponent<Chicken>().Use();
+            if (player.velocity.x > 0f){
+                sprite.flipX = false;
             }
-            else if (hairDryer){
-                playerT.GetChild(0).GetComponent<HairDryer>().Use();
+            else if (player.velocity.x < 0f){
+                sprite.flipX = true;
             }
-            else if (trash){
-                playerT.GetChild(0).GetComponent<Trash>().Use();
+            if (!(Mathf.Abs(player.velocity.x) > maxSpeedH)){
+                player.AddForce(transform.right * forceH * Input.GetAxis("Horizontal"));
             }
-            else if (trap){
-                playerT.GetChild(0).GetComponent<Trap>().Use();
+            if (Input.GetKeyDown(KeyCode.UpArrow) && grounded){
+                player.AddForce(transform.up * forceV, ForceMode2D.Impulse);
+                anim.SetBool("jump", true);
             }
-            else if (laundry){
-                playerT.GetChild(0).GetComponent<Laundry>().Use();
+            else{
+                anim.SetBool("jump", false);
+            }
+            if (currentHealth <= 0){
+                SceneManager.LoadScene(scene);
+            }
+            if (Mathf.Abs(player.velocity.x) > .1f){
+                anim.SetBool("walk", true);
+            }
+            else{
+                anim.SetBool("walk", false);
             }
         }
-        if (player.velocity.x > 0f){
-            sprite.flipX = false;
-        }
-        else if (player.velocity.x < 0f){
-            sprite.flipX = true;
-        }
-        if (!(Mathf.Abs(player.velocity.x) > maxSpeedH)){
-            player.AddForce(transform.right * forceH * Input.GetAxis("Horizontal"));
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && grounded){
-            player.AddForce(transform.up * forceV, ForceMode2D.Impulse);
-            anim.SetBool("jump", true);
-        }
-        else{
-            anim.SetBool("jump", false);
-        }
-        if (currentHealth <= 0){
-            SceneManager.LoadScene(scene);
-        }
-        if (Mathf.Abs(player.velocity.x) > .1f){
+        else if (climbUp && playerT.position != upstairs.position){
             anim.SetBool("walk", true);
+            Physics2D.IgnoreCollision(floor.GetComponent<BoxCollider2D>(), playerC, true);
+            player.gravityScale = 0;
+            playerT.position = Vector3.MoveTowards(playerT.position, upstairs.position, .05f);
         }
-        else{
+        else if (climbDown && playerT.position != downstairs.position){
+            anim.SetBool("walk", true);
+            Physics2D.IgnoreCollision(floor.GetComponent<BoxCollider2D>(), playerC, true);
+            player.gravityScale = 0;
+            playerT.position = Vector3.MoveTowards(playerT.position, downstairs.position, .05f);
+        }
+        if ((climbUp && playerT.position == upstairs.position) || (climbDown && playerT.position == downstairs.position)){
+            climbUp = false;
+            climbDown = false;
             anim.SetBool("walk", false);
+            Physics2D.IgnoreCollision(floor.GetComponent<BoxCollider2D>(), playerC, false);
+            player.gravityScale = 2;
         }
         /*if(Input.GetKeyDown(KeyCode.P)){
             TakeDamage(100);
@@ -115,14 +142,5 @@ public class Player : MonoBehaviour{
     public void TakeDamage(int damage){
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
-    }
-
-    public void climb(Transform target){
-        while (transform.position != target.position){
-            anim.SetBool("walk", true);
-            player.velocity = new Vector3(0, 0, 0);
-            Physics2D.IgnoreCollision(floor.GetComponent<BoxCollider2D>(), GetComponent<BoxCollider2D>(), true);
-            player.position = Vector3.MoveTowards(player.position, target.position, .05f);
-        }
     }
 }

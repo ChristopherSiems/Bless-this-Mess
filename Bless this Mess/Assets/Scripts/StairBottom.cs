@@ -6,7 +6,6 @@ public class StairBottom : MonoBehaviour
 {
     private GameObject player;
     private bool reachable = false;
-    public Transform top;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +17,8 @@ public class StairBottom : MonoBehaviour
     void Update()
     {
         if (reachable && Input.GetKeyDown(KeyCode.Z)){
-            player.GetComponent<Player>().climb(top);
+            player.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            player.GetComponent<Player>().climbUp = true;
         }
     }
 
