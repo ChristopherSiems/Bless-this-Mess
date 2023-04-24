@@ -47,6 +47,8 @@ public class HairDryer : MonoBehaviour{
             chicken.GetComponent<SpriteRenderer>().sprite = defrosted;
             player.GetComponent<Player>().hairDryer = false;
             player.GetComponent<Player>().holding = false;
+            item.GetChild(0).GetComponent<AudioSource>().Play();
+            item.DetachChildren();
             Destroy(gameObject);
             manager.GetComponent<GameManager>().chicken = true;
         }
