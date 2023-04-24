@@ -32,8 +32,5 @@ public class GameManager : MonoBehaviour{
         if (diff <= 0){
             SceneManager.LoadScene(scene);
         }
-        /*if (timer >= limit){
-
-        }*/
     }
 }

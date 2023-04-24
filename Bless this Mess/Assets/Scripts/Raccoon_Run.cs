@@ -5,6 +5,7 @@ using UnityEngine;
 public class Raccoon_Run : StateMachineBehaviour
 {
     public float speed = 2.5f;
+    public float Range = 6f;
     
     Transform player;
     Rigidbody2D rb;
@@ -25,6 +26,11 @@ public class Raccoon_Run : StateMachineBehaviour
         Vector2 target = new Vector2(player.position.x, rb.position.y);
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
+
+        if (Vector2.Distance(player.position, rb.position) <= Range)
+        {
+            animator.SetTrigger("Idle");
+        }
     }
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
