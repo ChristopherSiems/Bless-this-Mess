@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RaccoonIdle : StateMachineBehaviour
 {
-    public AudioSource source;
+    AudioSource source;
     Transform player;
     Rigidbody2D rb;
     public float WalkRange = 2f;
@@ -20,12 +20,13 @@ public class RaccoonIdle : StateMachineBehaviour
         if (Vector2.Distance(player.position, rb.position) <= WalkRange)
         {
             animator.SetTrigger("Run");
+            source.Play();
         }
     }
     override public void OnStateExit(UnityEngine.Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
         animator.ResetTrigger("Idle");
-        source.Play();
+        
     }
 
 

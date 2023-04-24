@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class RaccoonGeneral : MonoBehaviour
 {
-
+    AudioSource source;
     private float knockbackDir;
     public float knockback;
     public Transform player;
+    public float WalkRange = 60f;
+    Rigidbody2D rb;
 
     public bool isFlipped = false;
     public Player playerdamage;
@@ -33,6 +35,10 @@ public class RaccoonGeneral : MonoBehaviour
     private void Update()
     {
         knockbackDir = player.GetComponent<SpriteRenderer>().flipX ? 1 : (float)-1;
+        if (Vector2.Distance(player.position, rb.position) <= WalkRange)
+        {
+            source.Play();
+        }
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
