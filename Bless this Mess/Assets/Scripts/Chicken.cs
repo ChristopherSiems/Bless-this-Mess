@@ -25,8 +25,8 @@ public class Chicken : MonoBehaviour{
     void Update(){
         if (sprite.sprite == defrosted && !done){
             done = true;
-            Sprite newSprite = Resources.Load<Sprite>("Checked_Box"); //name of completed sprite
-            sprite.sprite = newSprite;
+            //Sprite newSprite = Resources.Load<Sprite>("Checked_Box"); //name of completed sprite
+            //sprite.sprite = newSprite;
         }
         if (Input.GetKeyDown(KeyCode.Z) && fridge.GetComponent<Fridge>().reachable && !player.GetComponent<Player>().holding && !done){
             player.GetComponent<Player>().holding = true;
@@ -45,7 +45,7 @@ public class Chicken : MonoBehaviour{
             player.GetComponent<Transform>().DetachChildren();
             item.SetParent(stove.GetComponent<Transform>().GetChild(0));
             item.position = item.parent.position;
-            sprite.sortingLayerName = "Background";
+            sprite.sortingLayerName = "Laundry";
         }
     }
 }

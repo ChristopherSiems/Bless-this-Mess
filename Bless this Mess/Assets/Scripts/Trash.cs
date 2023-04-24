@@ -42,13 +42,13 @@ public class Trash : MonoBehaviour{
     }
 
     public void Use(){
-        if (Vector3.Distance(trashcan.GetComponent<Transform>().position, transform.position) < 2){
+        if (Vector3.Distance(trashcan.GetComponent<Transform>().position, transform.position) < 3){
             player.GetComponent<Player>().trash = false;
             player.GetComponent<Player>().holding = false;
             Destroy(gameObject);
-            done = true;
+            /*done = true;
             Sprite newSprite = Resources.Load<Sprite>("Checked_Box"); //name of completed sprite
-            sprite.sprite = newSprite;
+            sprite.sprite = newSprite;*/
         }
     }
 }

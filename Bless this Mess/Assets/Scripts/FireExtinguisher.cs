@@ -42,19 +42,17 @@ public class FireExtinguisher : MonoBehaviour{
     }
 
     public void Use(){
-        if (Vector3.Distance(fire.GetComponent<Transform>().position, transform.position) < 2){
+
+        if (Vector3.Distance(fire.GetComponent<Transform>().position, transform.position) < 10){
             Destroy(fire);
             player.GetComponent<Player>().fireExtinguisher = false;
             player.GetComponent<Player>().holding = false;
             Destroy(gameObject);
-        }
+    }
         // switches the task from incomplete to complete 
-        if (!fire) {
+        /*if (!fire) {
             done = true;
             Sprite newSprite = Resources.Load<Sprite>("Checked_Box"); //name of completed sprite
-            sprite.sprite = newSprite;
-}
-
-
+            sprite.sprite = newSprite;*/
     }
 }
