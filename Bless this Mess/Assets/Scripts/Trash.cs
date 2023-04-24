@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Trash : MonoBehaviour{
     private bool grabable = false;
-    private bool done = false;
+    //private bool done = false;
     private Transform item;
     private GameObject player;
     private SpriteRenderer sprite;
     private GameObject trashcan;
+    public GameObject manager;
 
     // Start is called before the first frame update
     void Start(){
@@ -42,10 +43,11 @@ public class Trash : MonoBehaviour{
     }
 
     public void Use(){
-        if (Vector3.Distance(trashcan.GetComponent<Transform>().position, transform.position) < 3){
+        if (Vector3.Distance(trashcan.GetComponent<Transform>().position, transform.position) < 10){
             player.GetComponent<Player>().trash = false;
             player.GetComponent<Player>().holding = false;
             Destroy(gameObject);
+            manager.GetComponent<GameManager>().trash += 1;
             /*done = true;
             Sprite newSprite = Resources.Load<Sprite>("Checked_Box"); //name of completed sprite
             sprite.sprite = newSprite;*/

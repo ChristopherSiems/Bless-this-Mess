@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour{
     private int sec;
     private float diff;
     public int scene;
+    public int scene2;
+    public int trash = 0;
+    public bool chicken = false;
 
     // Start is called before the first frame update
     void Start(){
@@ -31,6 +34,9 @@ public class GameManager : MonoBehaviour{
         }
         if (diff <= 0){
             SceneManager.LoadScene(scene);
+        }
+        if (trash == 3 && chicken){
+            SceneManager.LoadScene(scene2);
         }
     }
 }

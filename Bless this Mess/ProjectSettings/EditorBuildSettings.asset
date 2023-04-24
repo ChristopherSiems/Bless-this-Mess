@@ -12,9 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/LoadingScreen.unity
     guid: 6b3495a412d232d4d8cffef558a8ef8c
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Level.unity
+    guid: 10fda72feb4c2614681ebc7b0be7af81
   - enabled: 1
     path: Assets/Scenes/FailScreen.unity
     guid: 3df548e8d84836a47969bbb25b36b80f
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: 0db673f68d952f7439bb1b171a1e8c96
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
