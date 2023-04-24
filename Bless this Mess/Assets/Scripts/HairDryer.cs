@@ -9,6 +9,7 @@ public class HairDryer : MonoBehaviour{
     private SpriteRenderer sprite;
     private GameObject chicken;
     public Sprite defrosted;
+    public GameObject manager;
 
     // Start is called before the first frame update
     void Start(){
@@ -47,6 +48,7 @@ public class HairDryer : MonoBehaviour{
             player.GetComponent<Player>().hairDryer = false;
             player.GetComponent<Player>().holding = false;
             Destroy(gameObject);
+            manager.GetComponent<GameManager>().chicken = true;
         }
     }
 }
