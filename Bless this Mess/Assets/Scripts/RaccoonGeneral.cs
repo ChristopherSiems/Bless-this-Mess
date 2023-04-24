@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class RaccoonGeneral : MonoBehaviour
 {
-    public float knockback = 1f;
-    public float knockbackDir = 1f;
+
 
     public Transform player;
 
     public bool isFlipped = false;
-    private GameObject Player;
+    public Player playerdamage;
     public void LookAtPlayer()
-   
     {
         Vector3 flipped = transform.localScale;
         flipped.z *= -1f;
@@ -23,7 +21,7 @@ public class RaccoonGeneral : MonoBehaviour
             transform.Rotate(0f, 180f, 0f);
             isFlipped = false;
         }
-        else if(transform.position.x < player.position.x && !isFlipped)
+        else if (transform.position.x < player.position.x && !isFlipped)
         {
             transform.localScale = flipped;
             transform.Rotate(0f, 180f, 0f);
@@ -32,11 +30,10 @@ public class RaccoonGeneral : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == Player)
+        if (collision.gameObject.tag == "Player")
         {
-            Player.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
-            Player.GetComponent<Rigidbody2D>().AddForce(transform.right * knockbackDir * knockback, ForceMode2D.Impulse);
-            Player.GetComponent<Player>().TakeDamage(20);
+            playerdamage.TakeDamage(20);
         }
     }
+
 }
