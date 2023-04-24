@@ -5,7 +5,8 @@ using UnityEngine;
 public class RaccoonGeneral : MonoBehaviour
 {
 
-
+    private float knockbackDir;
+    public float knockback;
     public Transform player;
 
     public bool isFlipped = false;
@@ -28,10 +29,17 @@ public class RaccoonGeneral : MonoBehaviour
             isFlipped = true;
         }
     }
+
+    private void Update()
+    {
+        knockbackDir = player.GetComponent<SpriteRenderer>().flipX ? 1 : (float)-1;
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
+            player.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            player.GetComponent<Rigidbody2D>().AddForce(transform.right * knockbackDir * knockback, ForceMode2D.Impulse);
             playerdamage.TakeDamage(20);
         }
     }

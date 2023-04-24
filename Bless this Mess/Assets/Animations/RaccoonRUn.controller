@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b0b23fff516d0a409b4964b4aac272d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WalkRange: 10
+  WalkRange: 30
 --- !u!1101 &-8313171317961378125
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -190,5 +190,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98918517822c8bf45a83bc6441eeaa64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
-  Range: 15
+  speed: 4
+  Range: 45

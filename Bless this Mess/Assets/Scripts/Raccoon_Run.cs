@@ -28,13 +28,13 @@ public class Raccoon_Run : StateMachineBehaviour
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
 
-        if (Vector2.Distance(player.position, rb.position) <= Range)
+        if (Vector2.Distance(player.position, rb.position) >= Range)
         {
             animator.SetTrigger("Idle");
         }
     }
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        animator.ResetTrigger("Run");
     }
 }
