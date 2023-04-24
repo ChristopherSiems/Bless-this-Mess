@@ -7,6 +7,7 @@ public class Raccoon_Run : StateMachineBehaviour
     public float speed = 2.5f;
     public float Range = 6f;
     
+    
     Transform player;
     Rigidbody2D rb;
     RaccoonGeneral boss;
