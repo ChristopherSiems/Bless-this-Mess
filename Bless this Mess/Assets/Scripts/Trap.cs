@@ -5,7 +5,7 @@ using UnityEngine;
 public class Trap : MonoBehaviour{
     private bool grabable = false;
     private Transform item;
-    private bool done = false;
+    //private bool done = false;
     private GameObject player;
     private SpriteRenderer sprite;
     private Rigidbody2D trap;
@@ -61,12 +61,13 @@ public class Trap : MonoBehaviour{
         player.GetComponent<Player>().trap = false;
         player.GetComponent<Player>().holding = false;
         player.GetComponent<Transform>().DetachChildren();
+        sprite.sortingLayerName = "Foreground";
 
         // Check if trap is no longer being held and player is no longer holding trap
-        if (!player.GetComponent<Player>().holding && !player.GetComponent<Player>().trap) {
+        /*if (!player.GetComponent<Player>().holding && !player.GetComponent<Player>().trap) {
             done = true;
             Sprite newSprite = Resources.Load<Sprite>("Checked_Box"); //name of completed sprite
             sprite.sprite = newSprite;
-    }
+        }*/
     }
 }

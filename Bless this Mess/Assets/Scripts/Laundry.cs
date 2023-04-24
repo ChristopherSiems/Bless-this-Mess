@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Laundry : MonoBehaviour{
-    private bool done = false;
+    //private bool done = false;
     private Transform item;
     private GameObject player;
     private SpriteRenderer sprite;
@@ -37,10 +37,10 @@ public class Laundry : MonoBehaviour{
             Destroy(gameObject);
             
         }
-        if (!player.GetComponent<Player>().holding && !player.GetComponent<Player>().trash) {
+        /*if (!player.GetComponent<Player>().holding && !player.GetComponent<Player>().trash) {
             done = true;
             Sprite newSprite = Resources.Load<Sprite>("Checked_Box"); //name of completed sprite
             sprite.sprite = newSprite;
-    }
+        }*/
     }
 }

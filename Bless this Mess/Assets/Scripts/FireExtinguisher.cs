@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FireExtinguisher : MonoBehaviour{
     private bool grabable = false;
-    private bool done = false;
+    //private bool done = false;
     private Transform item;
     private GameObject player;
     private SpriteRenderer sprite;
