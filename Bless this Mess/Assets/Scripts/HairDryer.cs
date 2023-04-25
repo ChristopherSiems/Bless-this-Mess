@@ -49,6 +49,7 @@ public class HairDryer : MonoBehaviour{
             player.GetComponent<Player>().holding = false;
             item.GetChild(0).GetComponent<AudioSource>().Play();
             item.DetachChildren();
+            chicken.GetComponent<SpriteRenderer>().sortingLayerName = "Laundry";
             Destroy(gameObject);
             manager.GetComponent<GameManager>().chicken = true;
         }
