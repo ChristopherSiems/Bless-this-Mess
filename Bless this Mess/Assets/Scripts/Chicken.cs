@@ -10,7 +10,6 @@ public class Chicken : MonoBehaviour{
     private GameObject stove;
     private GameObject fridge;
     public Sprite defrosted;
-    public Sprite checkmark;
 
     // Start is called before the first frame update
     void Start(){
@@ -26,11 +25,6 @@ public class Chicken : MonoBehaviour{
     void Update(){
         if (sprite.sprite == defrosted && !done){
             done = true;
-
-        if (done)
-        {
-            GetComponent<SpriteRenderer>().sprite = checkmark;
-        }
             //Sprite newSprite = Resources.Load<Sprite>("Checked_Box"); //name of completed sprite
             //sprite.sprite = newSprite;
         }
