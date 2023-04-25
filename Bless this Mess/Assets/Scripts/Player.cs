@@ -103,7 +103,7 @@ public class Player : MonoBehaviour{
             anim.SetBool("walk", true);
             Physics2D.IgnoreCollision(floor.GetComponent<BoxCollider2D>(), playerC, true);
             player.gravityScale = 0;
-            playerT.position = Vector3.MoveTowards(playerT.position, downstairs.position, .05f);
+            playerT.position = Vector3.MoveTowards(playerT.position, downstairs.position, .1f);
         }
         if ((climbUp && playerT.position == upstairs.position) || (climbDown && playerT.position == downstairs.position)){
             climbUp = false;
