@@ -143,4 +143,5 @@ public class Player : MonoBehaviour{
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
     }
+
 }
